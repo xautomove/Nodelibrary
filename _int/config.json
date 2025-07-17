@@ -1,0 +1,22 @@
+{
+  "name": "输出浮点数",
+  "description": "一个提供初始数值的节点，没有输入，只有输出",
+  "type": "流",
+  "parameters": {
+    "inputs": [],
+    "outputs": [
+      {
+        "type": "number",
+        "name": "数值"
+      }
+    ]
+  },
+  "config": [
+    {
+      "name": "初始值",
+      "default_value": "0",
+      "type": "number",
+      "description": "设置要输出的数值"
+    }
+  ]
+}

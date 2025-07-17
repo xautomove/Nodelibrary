@@ -1,0 +1,22 @@
+{
+  "name": "输出字符串",
+  "description": "一个提供初始数值的节点，没有输入，只有输出",
+  "type": "流",
+  "parameters": {
+    "inputs": [],
+    "outputs": [
+      {
+        "type": "string",
+        "name": "字符串"
+      }
+    ]
+  },
+  "config": [
+    {
+      "name": "初始值",
+      "default_value": "",
+      "type": "string",
+      "description": "设置要输出的内容"
+    }
+  ]
+}
