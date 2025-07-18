@@ -1,0 +1,84 @@
+{
+  "name": "GNSS路径发布器",
+  "description": "订阅GNSS数据，记录路径点并发布路径消息",
+  "type": "流",
+  "parameters": {
+    "inputs": [
+      {
+        "type": "string",
+        "name": "gnss_topic"
+      }
+    ],
+    "outputs": [
+      {
+        "type": "string",
+        "name": "path_topic"
+      }
+    ]
+  },
+  "config": [
+    {
+      "name": "path_topic",
+      "type": "string",
+      "default_value": "/gnss_path",
+      "required": true,
+      "description": "路径发布话题"
+    },
+    {
+      "name": "frame_id",
+      "type": "string",
+      "default_value": "map",
+      "required": true,
+      "description": "路径坐标系"
+    },
+    {
+      "name": "max_points",
+      "type": "number",
+      "default_value": "1000",
+      "required": false,
+      "description": "最大路径点数量"
+    },
+    {
+      "name": "min_distance",
+      "type": "number",
+      "default_value": "1.0",
+      "required": false,
+      "description": "最小距离阈值（米）"
+    },
+    {
+      "name": "distance_offset",
+      "type": "number",
+      "default_value": "0.0",
+      "required": false,
+      "description": "距离偏移值（米），正数增加阈值，负数减少阈值"
+    },
+    {
+      "name": "path_color_r",
+      "type": "number",
+      "default_value": "0.0",
+      "required": false,
+      "description": "路径颜色红色分量"
+    },
+    {
+      "name": "path_color_g",
+      "type": "number",
+      "default_value": "1.0",
+      "required": false,
+      "description": "路径颜色绿色分量"
+    },
+    {
+      "name": "path_color_b",
+      "type": "number",
+      "default_value": "0.0",
+      "required": false,
+      "description": "路径颜色蓝色分量"
+    },
+    {
+      "name": "path_width",
+      "type": "number",
+      "default_value": "0.1",
+      "required": false,
+      "description": "路径线宽"
+    }
+  ]
+} 

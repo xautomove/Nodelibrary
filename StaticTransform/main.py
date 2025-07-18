@@ -1,25 +1,31 @@
-import os
-import time
 import rclpy
-from rclpy.node import Node
-from rclpy import time as rclpy_time
 from tf2_ros.static_transform_broadcaster import StaticTransformBroadcaster
 from geometry_msgs.msg import TransformStamped
 import numpy as np
 
 class MainNode:
-    def __init__(self, cache):
+    def __init__(self, cache, uuid,sdk):
         self.config = {}
         self.cache = cache
+        self.sdk = sdk
+        self.uuid = uuid
         self.static_broadcaster = None
         self.node = None
+        self.sdk.debug("StaticTransform init")
 
     def get_user_input(self, config):
         self.config = config
-        print(f"#用户配置: {self.config}")
+        self.sdk.debug(f"用户配置: {self.config}")
 
     def get_node_input(self, config):
-        pass
+        if isinstance(config, dict):
+            self.source_frame = str(config.get('source_frame', 'base_link'))
+            self.target_frame = str(config.get('target_frame', 'target_frame'))
+            self.sdk.debug(f"节点输入source_frame: {self.source_frame}")
+            self.sdk.debug(f"节点输入target_frame: {self.target_frame}")
+        else:
+            self.source_frame = 'base_link'
+            self.target_frame = 'target_frame'
 
     def get_config_value(self, key, default=None):
         """从配置列表中获取指定键的值"""
@@ -49,15 +55,15 @@ class MainNode:
         self.node = rclpy.create_node('static_transform_node')
         self.static_broadcaster = StaticTransformBroadcaster(self.node)
         
-        print("# ROS2节点和TF组件初始化完成")
+        self.sdk.debug("# ROS2节点和TF组件初始化完成")
 
     def setup_static_transform(self):
         """设置静态变换"""
         if self.node is not None:
             transform = TransformStamped()
             transform.header.stamp = self.node.get_clock().now().to_msg()
-            transform.header.frame_id = self.get_config_value("source_frame", "base_link")
-            transform.child_frame_id = self.get_config_value("target_frame", "target_frame")
+            transform.header.frame_id = getattr(self, 'source_frame', 'base_link')
+            transform.child_frame_id = getattr(self, 'target_frame', 'target_frame')
             
             # 设置平移
             transform.transform.translation.x = self.get_config_value("static_x", 0.0)
@@ -84,7 +90,7 @@ class MainNode:
             
             if self.static_broadcaster is not None:
                 self.static_broadcaster.sendTransform(transform)
-                print(f"# 发布静态变换: {transform.header.frame_id} -> {transform.child_frame_id}")
+                self.sdk.debug(f"发布静态变换: {transform.header.frame_id} -> {transform.child_frame_id}")
 
     def execute(self):
         # 初始化ROS2节点
@@ -93,23 +99,26 @@ class MainNode:
         # 设置静态变换
         self.setup_static_transform()
         
-        print(f"# 静态TF节点已启动，持续运行中...")
-        print(f"# 源坐标系: {self.get_config_value('source_frame', 'base_link')}")
-        print(f"# 目标坐标系: {self.get_config_value('target_frame', 'target_frame')}")
+        self.sdk.debug(f"静态TF节点已启动，持续运行中...")
+        self.sdk.debug(f"源坐标系: {getattr(self, 'source_frame', 'base_link')}")
+        self.sdk.debug(f"目标坐标系: {getattr(self, 'target_frame', 'target_frame')}")
         
         # 持续运行
         try:
+            self.sdk.finish()
             while True:
                 # 处理ROS2事件
                 if self.node:
                     rclpy.spin_once(self.node, timeout_sec=0.1)
-                
-        except KeyboardInterrupt:
-            print("# 收到停止信号，正在关闭节点...")
+                if self.sdk.is_stop():
+                    self.sdk.debug("收到停止信号，正在关闭节点...")
+                    break
         except Exception as e:
-            print(f"# 节点运行出错: {e}")
+            self.sdk.debug(f"节点运行出错: {e}")
+            self.sdk.error()
         finally:
             # 清理ROS2资源
             if self.node:
                 self.node.destroy_node()
-            print("# 静态TF节点已停止")
+            self.sdk.debug("# 静态TF节点已停止")
+            self.sdk.finish()

@@ -1,22 +1,21 @@
 {
   "name": "StaticTransform",
   "description": "发布静态TF",
-  "type": "任务",
+  "type": "流",
   "parameters": {
+    "inputs": [
+      {
+        "type": "string",
+        "name": "source_frame"
+      },
+      {
+        "type": "string",
+        "name": "target_frame"
+      }
+    ],
+    "outputs": []
   },
   "config": [
-    {
-      "name": "source_frame",
-      "type": "string",
-      "required": true,
-      "description": "父坐标系名称"
-    },
-    {
-      "name": "target_frame",
-      "type": "string",
-      "required": true,
-      "description": "子坐标系名称"
-    },
     {
       "name": "static_x",
       "type": "number",
