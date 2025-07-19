@@ -173,6 +173,8 @@ class MainNode:
             
             if self.ekf_process:
                 self.sdk.debug(f"EKF节点已启动，PID: {self.ekf_process.pid}")
+                # 保存进程ID
+                self.sdk.save_pid(str(self.ekf_process.pid))
             else:
                 self.sdk.debug("EKF进程启动失败")
                 return False
