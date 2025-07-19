@@ -6,6 +6,7 @@ from geometry_msgs.msg import TransformStamped
 import numpy as np
 import subprocess
 import time
+import os
 
 class MainNode:
     def __init__(self, cache, uuid, sdk):
@@ -169,7 +170,7 @@ class MainNode:
             # 启动ros2 run
             cmd = ["ros2", "run", "robot_localization", "ekf_node"] + param_args
             self.sdk.debug(f"启动命令: {cmd}")
-            self.ekf_process = subprocess.Popen(cmd, stdout=subprocess.PIPE, stderr=subprocess.PIPE)
+            self.ekf_process = subprocess.Popen(cmd, stdout=subprocess.PIPE, stderr=subprocess.PIPE, preexec_fn=os.setsid)
             
             if self.ekf_process:
                 self.sdk.debug(f"EKF节点已启动，PID: {self.ekf_process.pid}")
@@ -201,11 +202,12 @@ class MainNode:
         """停止EKF节点"""
         if self.ekf_process:
             try:
-                self.ekf_process.terminate()
+                # 使用进程组ID杀死整个进程组
+                os.killpg(os.getpgid(self.ekf_process.pid), 15)  # SIGTERM
                 self.ekf_process.wait(timeout=5)
                 self.sdk.debug("EKF节点已停止")
             except subprocess.TimeoutExpired:
-                self.ekf_process.kill()
+                os.killpg(os.getpgid(self.ekf_process.pid), 9)  # SIGKILL
                 self.sdk.debug("强制停止EKF节点")
             except Exception as e:
                 self.sdk.debug(f"停止EKF节点时出错: {e}")
