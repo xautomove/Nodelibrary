@@ -1,0 +1,116 @@
+{
+  "name": "机器人定位融合器",
+  "description": "基于robot_localization的多传感器数据融合节点，支持GNSS、IMU、里程计数据融合",
+  "type": "流",
+  "parameters": {
+    "inputs": [
+      {
+        "type": "string",
+        "name": "gnss_topic",
+        "default_value": ""
+      },
+      {
+        "type": "string",
+        "name": "imu_topic",
+        "default_value": ""
+      },
+      {
+        "type": "string",
+        "name": "odom_topic",
+        "default_value": ""
+      }
+    ],
+    "outputs": [
+      {
+        "type": "string",
+        "name": "fused_topic"
+      }
+    ]
+  },
+  "config": [
+    {
+      "name": "frequency",
+      "type": "number",
+      "default_value": "30.0",
+      "required": false,
+      "description": "滤波器更新频率，30Hz一般足够"
+    },
+    {
+      "name": "sensor_timeout",
+      "type": "number",
+      "default_value": "0.1",
+      "required": false,
+      "description": "超时时间，单位秒，避免死锁"
+    },
+    {
+      "name": "two_d_mode",
+      "type": "boolean",
+      "default_value": "true",
+      "required": false,
+      "description": "若是纯平面运动（无飞行、爬楼）设为true"
+    },
+    {
+      "name": "publish_tf",
+      "type": "boolean",
+      "default_value": "true",
+      "required": false,
+      "description": "是否自动发布TF（建议为true）"
+    },
+    {
+      "name": "map_frame",
+      "type": "string",
+      "default_value": "map",
+      "required": false,
+      "description": "世界参考坐标系（固定）"
+    },
+    {
+      "name": "odom_frame",
+      "type": "string",
+      "default_value": "odom",
+      "required": false,
+      "description": "滤波输出的中间参考系"
+    },
+    {
+      "name": "base_link_frame",
+      "type": "string",
+      "default_value": "base_link",
+      "required": false,
+      "description": "机器人本体坐标系（与TF一致）"
+    },
+    {
+      "name": "world_frame",
+      "type": "string",
+      "default_value": "map",
+      "required": false,
+      "description": "滤波器输出参考帧（建议为map）"
+    },
+    {
+      "name": "fused_topic",
+      "type": "string",
+      "default_value": "/fused_odom",
+      "required": false,
+      "description": "融合后的输出话题名称"
+    },
+    {
+      "name": "imu_vector",
+      "type": "string",
+      "default_value": "",
+      "required": false,
+      "description": "IMU数据向量配置，格式：[x,y,z,roll,pitch,yaw,vx,vy,vz,vroll,vpitch,vyaw,ax,ay,az]，例如：[false,false,false,false,false,false,false,false,false,false,false,false,false,false,false]"
+    },
+    {
+      "name": "odom_vector",
+      "type": "string",
+      "default_value": "",
+      "required": false,
+      "description": "里程计数据向量配置，格式：[x,y,z,roll,pitch,yaw,vx,vy,vz,vroll,vpitch,vyaw,ax,ay,az]，例如：[true,true,false,false,false,true,true,true,false,false,false,true,false,false,false]"
+    },
+    {
+      "name": "gnss_vector",
+      "type": "string",
+      "default_value": "",
+      "required": false,
+      "description": "GNSS数据向量配置，格式：[x,y,z,roll,pitch,yaw,vx,vy,vz,vroll,vpitch,vyaw,ax,ay,az]，例如：[true,true,false,false,false,false,false,false,false,false,false,false,false,false,false]"
+    }
+  ]
+} 

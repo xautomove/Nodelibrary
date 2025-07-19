@@ -105,6 +105,7 @@ class MainNode:
         
         # 持续运行
         try:
+            self.sdk.bg(1)
             self.sdk.finish()
             while True:
                 # 处理ROS2事件
@@ -121,4 +122,5 @@ class MainNode:
             if self.node:
                 self.node.destroy_node()
             self.sdk.debug("# 静态TF节点已停止")
+            self.sdk.bg(0)
             self.sdk.finish()
