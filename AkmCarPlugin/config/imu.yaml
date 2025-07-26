@@ -1,0 +1,4 @@
+imu:
+  topic: "/imu" # 传感器数据发布的话题
+  frame_id: "imu_link" # 传感器数据发布的坐标系
+  update_rate: 50 # 传感器数据更新的频率

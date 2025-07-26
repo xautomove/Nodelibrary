@@ -1,0 +1,7 @@
+lidar:
+  topic: "/scan" # 传感器数据发布的话题
+  frame_id: "lidar_link" # 传感器数据发布的坐标系
+  update_rate: 10 # 传感器数据更新的频率
+  min_angle: -3.14 # 传感器扫描的最小角度
+  max_angle: 3.14 # 传感器扫描的最大角度
+  samples: 360 # 传感器扫描的点数

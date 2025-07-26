@@ -1,0 +1,211 @@
+<?xml version="1.0" ?>
+<sdf version="1.6">
+  <world name="default">
+    <!-- 地面和光源 -->
+    <include>
+      <uri>model://ground_plane</uri>
+    </include>
+    <include>
+      <uri>model://sun</uri>
+    </include>
+    
+    <!-- 围墙 -->
+    <model name="wall_north">
+      <static>true</static>
+      <pose>0 5 1 0 0 0</pose>
+      <link name="link">
+        <visual name="visual">
+          <geometry>
+            <box>
+              <size>12 0.2 2</size>
+            </box>
+          </geometry>
+          <material>
+            <diffuse>0.8 0.8 0.8 1</diffuse>
+          </material>
+        </visual>
+        <collision name="collision">
+          <geometry>
+            <box>
+              <size>12 0.2 2</size>
+            </box>
+          </geometry>
+        </collision>
+      </link>
+    </model>
+    
+    <model name="wall_south">
+      <static>true</static>
+      <pose>0 -5 1 0 0 0</pose>
+      <link name="link">
+        <visual name="visual">
+          <geometry>
+            <box>
+              <size>12 0.2 2</size>
+            </box>
+          </geometry>
+          <material>
+            <diffuse>0.8 0.8 0.8 1</diffuse>
+          </material>
+        </visual>
+        <collision name="collision">
+          <geometry>
+            <box>
+              <size>12 0.2 2</size>
+            </box>
+          </geometry>
+        </collision>
+      </link>
+    </model>
+    
+    <model name="wall_east">
+      <static>true</static>
+      <pose>6 0 1 0 0 0</pose>
+      <link name="link">
+        <visual name="visual">
+          <geometry>
+            <box>
+              <size>0.2 10 2</size>
+            </box>
+          </geometry>
+          <material>
+            <diffuse>0.8 0.8 0.8 1</diffuse>
+          </material>
+        </visual>
+        <collision name="collision">
+          <geometry>
+            <box>
+              <size>0.2 10 2</size>
+            </box>
+          </geometry>
+        </collision>
+      </link>
+    </model>
+    
+    <model name="wall_west">
+      <static>true</static>
+      <pose>-6 0 1 0 0 0</pose>
+      <link name="link">
+        <visual name="visual">
+          <geometry>
+            <box>
+              <size>0.2 10 2</size>
+            </box>
+          </geometry>
+          <material>
+            <diffuse>0.8 0.8 0.8 1</diffuse>
+          </material>
+        </visual>
+        <collision name="collision">
+          <geometry>
+            <box>
+              <size>0.2 10 2</size>
+            </box>
+          </geometry>
+        </collision>
+      </link>
+    </model>
+    
+    <!-- 障碍物盒子 -->
+    <model name="box1">
+      <static>true</static>
+      <pose>2 2 0.5 0 0 0</pose>
+      <link name="link">
+        <visual name="visual">
+          <geometry>
+            <box>
+              <size>1 1 1</size>
+            </box>
+          </geometry>
+          <material>
+            <diffuse>0.8 0.2 0.2 1</diffuse>
+          </material>
+        </visual>
+        <collision name="collision">
+          <geometry>
+            <box>
+              <size>1 1 1</size>
+            </box>
+          </geometry>
+        </collision>
+      </link>
+    </model>
+    
+    <model name="box2">
+      <static>true</static>
+      <pose>-3 -2 0.5 0 0 0</pose>
+      <link name="link">
+        <visual name="visual">
+          <geometry>
+            <box>
+              <size>1.5 0.8 1</size>
+            </box>
+          </geometry>
+          <material>
+            <diffuse>0.2 0.8 0.2 1</diffuse>
+          </material>
+        </visual>
+        <collision name="collision">
+          <geometry>
+            <box>
+              <size>1.5 0.8 1</size>
+            </box>
+          </geometry>
+        </collision>
+      </link>
+    </model>
+    
+    <!-- 圆柱形障碍物 -->
+    <model name="cylinder1">
+      <static>true</static>
+      <pose>-1 3 0.5 0 0 0</pose>
+      <link name="link">
+        <visual name="visual">
+          <geometry>
+            <cylinder>
+              <radius>0.3</radius>
+              <length>1</length>
+            </cylinder>
+          </geometry>
+          <material>
+            <diffuse>0.2 0.2 0.8 1</diffuse>
+          </material>
+        </visual>
+        <collision name="collision">
+          <geometry>
+            <cylinder>
+              <radius>0.3</radius>
+              <length>1</length>
+            </cylinder>
+          </geometry>
+        </collision>
+      </link>
+    </model>
+    
+    <model name="cylinder2">
+      <static>true</static>
+      <pose>4 -1 0.5 0 0 0</pose>
+      <link name="link">
+        <visual name="visual">
+          <geometry>
+            <cylinder>
+              <radius>0.25</radius>
+              <length>1</length>
+            </cylinder>
+          </geometry>
+          <material>
+            <diffuse>0.8 0.8 0.2 1</diffuse>
+          </material>
+        </visual>
+        <collision name="collision">
+          <geometry>
+            <cylinder>
+              <radius>0.25</radius>
+              <length>1</length>
+            </cylinder>
+          </geometry>
+        </collision>
+      </link>
+    </model>
+  </world>
+</sdf> 
