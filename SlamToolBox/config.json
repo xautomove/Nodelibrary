@@ -1,0 +1,52 @@
+{
+  "name": "SlamToolbox",
+  "description": "使用Slam Toolbox进行SLAM建图，定时保存地图",
+  "type": "流",
+  "parameters": {
+    "inputs": [
+      {
+        "type": "string",
+        "name": "scan_topic",
+        "description": "激光雷达话题名称"
+      }
+    ],
+    "outputs": []
+  },
+  "config": [
+    {
+      "name": "save_interval",
+      "type": "number",
+      "required": false,
+      "default_value": 30.0,
+      "description": "保存地图间隔（秒）"
+    },
+    {
+      "name": "save_path",
+      "type": "string",
+      "required": false,
+      "default_value": "/tmp/map",
+      "description": "地图保存路径"
+    },
+    {
+      "name": "map_resolution",
+      "type": "number",
+      "required": false,
+      "default_value": 0.05,
+      "description": "地图分辨率（米/像素）"
+    },
+    {
+      "name": "max_range",
+      "type": "number",
+      "required": false,
+      "default_value": 20.0,
+      "description": "激光雷达最大范围（米）"
+    },
+    {
+      "name": "update_rate",
+      "type": "number",
+      "required": false,
+      "default_value": 5.0,
+      "description": "地图更新频率（Hz）"
+    }
+  ]
+} 
