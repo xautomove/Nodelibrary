@@ -62,8 +62,6 @@ class MainNode:
             }
             
             self.sdk.debug(f"调用Ollama API: {url}")
-            self.sdk.debug(f"模型: {model}")
-            self.sdk.debug(f"用户提示词: {prompt}")
             
             response = requests.post(url, json=payload, timeout=int(timeout))
             
