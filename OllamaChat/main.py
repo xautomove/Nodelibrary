@@ -19,7 +19,6 @@ class MainNode:
     def get_node_input(self, config):
         if isinstance(config, dict):
             self.user_prompt = str(config.get('user_prompt', ''))
-            self.sdk.debug(f"节点输入user_prompt: {self.user_prompt}")
         else:
             self.user_prompt = ''
 
