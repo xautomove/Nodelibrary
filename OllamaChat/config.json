@@ -1,0 +1,58 @@
+{
+  "name": "OllamaChat",
+  "description": "与本地Ollama大语言模型交互的聊天节点",
+  "type": "流",
+  "parameters": {
+    "inputs": [
+      {
+        "type": "string",
+        "name": "user_prompt",
+        "description": "用户输入的提示词"
+      }
+    ],
+    "outputs": [
+      {
+        "type": "string",
+        "name": "ai_response",
+        "description": "AI的回复内容"
+      }
+    ]
+  },
+  "config": [
+    {
+      "name": "ollama_host",
+      "type": "string",
+      "required": false,
+      "default_value": "localhost",
+      "description": "Ollama服务器地址"
+    },
+    {
+      "name": "ollama_port",
+      "type": "number",
+      "required": false,
+      "default_value": 11434,
+      "description": "Ollama服务器端口"
+    },
+    {
+      "name": "model_name",
+      "type": "string",
+      "required": false,
+      "default_value": "llama2",
+      "description": "使用的模型名称"
+    },
+    {
+      "name": "system_prompt",
+      "type": "string",
+      "required": false,
+      "default_value": "你是一个有用的AI助手。",
+      "description": "系统提示词"
+    },
+    {
+      "name": "timeout",
+      "type": "number",
+      "required": false,
+      "default_value": 120,
+      "description": "请求超时时间（秒）"
+    }
+  ]
+} 
