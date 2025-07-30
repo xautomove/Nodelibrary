@@ -64,6 +64,8 @@ class MainNode:
             
             response = requests.post(url, json=payload, timeout=int(timeout))
             
+            self.sdk.debug(f"请求状态码: {response.status_code}")
+            
             if response.status_code == 200:
                 result = response.json()
                 if 'response' in result:

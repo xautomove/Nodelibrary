@@ -1,0 +1,45 @@
+{
+  "name": "MapServer",
+  "description": "地图服务器，加载并发布栅格地图",
+  "type": "流",
+  "parameters": {
+    "inputs": [],
+    "outputs": [
+      {
+        "type": "nav_msgs/OccupancyGrid",
+        "name": "map"
+      }
+    ]
+  },
+  "config": [
+    {
+      "name": "map_file",
+      "type": "file",
+      "required": true,
+      "description": "地图YAML文件路径",
+      "default_value": "/path/to/map.yaml"
+    },
+    {
+      "name": "frame_id",
+      "type": "string",
+      "required": false,
+      "description": "地图坐标系ID",
+      "default_value": "map"
+    },
+    {
+      "name": "topic_name",
+      "type": "string",
+      "required": false,
+      "description": "地图发布话题名称",
+      "default_value": "map"
+    },
+
+    {
+      "name": "use_compressed",
+      "type": "boolean",
+      "required": false,
+      "description": "是否使用压缩地图",
+      "default_value": false
+    }
+  ]
+} 
