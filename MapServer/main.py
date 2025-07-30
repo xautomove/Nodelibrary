@@ -223,6 +223,8 @@ class MainNode:
         topic_name = self.get_config_value("topic_name", "map")
         frame_id = self.get_config_value("frame_id", "map")
         
+        self.sdk.output({"map_name": topic_name})
+        
         self.sdk.debug(f"地图服务器已启动，持续运行中...")
         self.sdk.debug(f"地图文件: {map_file}")
         self.sdk.debug(f"发布话题: {topic_name}")

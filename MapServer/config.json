@@ -6,8 +6,8 @@
     "inputs": [],
     "outputs": [
       {
-        "type": "nav_msgs/OccupancyGrid",
-        "name": "map"
+        "type": "string",
+        "name": "map_name"
       }
     ]
   },
