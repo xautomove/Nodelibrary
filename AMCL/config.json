@@ -1,0 +1,144 @@
+{
+  "name": "AMCL",
+  "description": "AMCL定位节点，基于粒子滤波实现机器人定位",
+  "type": "流",
+  "parameters": {
+    "inputs": [
+      {
+        "type": "string",
+        "name": "scan_topic"
+      },
+      {
+        "type": "string", 
+        "name": "map_topic"
+      }
+    ],
+    "outputs": [
+      {
+        "type": "string",
+        "name": "robot_pose"
+      }
+    ]
+  },
+  "config": [
+    {
+      "name": "base_frame_id",
+      "type": "string",
+      "required": false,
+      "description": "机器人基座坐标系",
+      "default_value": "base_link"
+    },
+    {
+      "name": "odom_frame_id",
+      "type": "string",
+      "required": false,
+      "description": "里程计坐标系",
+      "default_value": "odom"
+    },
+    {
+      "name": "global_frame_id",
+      "type": "string",
+      "required": false,
+      "description": "全局坐标系",
+      "default_value": "map"
+    },
+    {
+      "name": "max_particles",
+      "type": "number",
+      "required": false,
+      "description": "最大粒子数",
+      "default_value": 2000
+    },
+    {
+      "name": "min_particles",
+      "type": "number",
+      "required": false,
+      "description": "最小粒子数",
+      "default_value": 500
+    },
+    {
+      "name": "alpha1",
+      "type": "number",
+      "required": false,
+      "description": "旋转运动噪声参数1",
+      "default_value": 0.2
+    },
+    {
+      "name": "alpha2",
+      "type": "number",
+      "required": false,
+      "description": "平移运动噪声参数1",
+      "default_value": 0.2
+    },
+    {
+      "name": "alpha3",
+      "type": "number",
+      "required": false,
+      "description": "平移运动噪声参数2",
+      "default_value": 0.2
+    },
+    {
+      "name": "alpha4",
+      "type": "number",
+      "required": false,
+      "description": "平移运动噪声参数3",
+      "default_value": 0.2
+    },
+    {
+      "name": "alpha5",
+      "type": "number",
+      "required": false,
+      "description": "旋转运动噪声参数2",
+      "default_value": 0.2
+    },
+    {
+      "name": "laser_max_range",
+      "type": "number",
+      "required": false,
+      "description": "激光雷达最大测量范围",
+      "default_value": 100.0
+    },
+    {
+      "name": "laser_min_range",
+      "type": "number",
+      "required": false,
+      "description": "激光雷达最小测量范围",
+      "default_value": -1.0
+    },
+    {
+      "name": "set_initial_pose",
+      "type": "boolean",
+      "required": false,
+      "description": "是否设置初始位姿",
+      "default_value": false
+    },
+    {
+      "name": "initial_pose_x",
+      "type": "number",
+      "required": false,
+      "description": "初始位姿X坐标",
+      "default_value": 0.0
+    },
+    {
+      "name": "initial_pose_y",
+      "type": "number",
+      "required": false,
+      "description": "初始位姿Y坐标",
+      "default_value": 0.0
+    },
+    {
+      "name": "initial_pose_z",
+      "type": "number",
+      "required": false,
+      "description": "初始位姿Z坐标",
+      "default_value": 0.0
+    },
+    {
+      "name": "initial_pose_yaw",
+      "type": "number",
+      "required": false,
+      "description": "初始位姿偏航角",
+      "default_value": 0.0
+    }
+  ]
+} 

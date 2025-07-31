@@ -81,7 +81,7 @@ negate: 0
 ```bash
 # Ubuntu/Debian系统
 sudo apt update
-sudo apt install ros-humble-nav2-map-server
+sudo apt install ros-humble-navigation2 ros-humble-nav2-bringup
 ```
 
 ## 注意事项
