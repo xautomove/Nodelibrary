@@ -1,0 +1,186 @@
+{
+  "name": "PlannerServer",
+  "description": "2D规划服务节点，基于nav2_planner包实现路径规划功能",
+  "type": "流",
+  "parameters": {
+    "inputs": [
+      {
+        "type": "string",
+        "name": "scan_topic"
+      },
+            {
+        "type": "string", 
+        "name": "map_topic"
+      }
+    ],
+    "outputs": [
+      {
+        "type": "string",
+        "name": "plan_topic"
+      }
+    ]
+  },
+  "config": [
+    {
+      "name": "planner_frequency",
+      "type": "number",
+      "required": false,
+      "description": "规划频率",
+      "default_value": 20.0
+    },
+    {
+      "name": "planner_plugin",
+      "type": "string",
+      "required": false,
+      "description": "规划算法插件",
+      "default_value": "nav2_navfn_planner/NavfnPlanner"
+    },
+    {
+      "name": "costmap_update_timeout",
+      "type": "number",
+      "required": false,
+      "description": "costmap更新超时时间",
+      "default_value": 1.0
+    },
+    {
+      "name": "global_frame",
+      "type": "string",
+      "required": false,
+      "description": "全局坐标系",
+      "default_value": "map"
+    },
+    {
+      "name": "robot_base_frame",
+      "type": "string",
+      "required": false,
+      "description": "机器人基座坐标系",
+      "default_value": "base_link"
+    },
+    {
+      "name": "robot_radius",
+      "type": "number",
+      "required": false,
+      "description": "机器人半径",
+      "default_value": 0.22
+    },
+    {
+      "name": "resolution",
+      "type": "number",
+      "required": false,
+      "description": "地图分辨率",
+      "default_value": 0.05
+    },
+    {
+      "name": "update_frequency",
+      "type": "number",
+      "required": false,
+      "description": "全局costmap更新频率",
+      "default_value": 1.0
+    },
+    {
+      "name": "publish_frequency",
+      "type": "number",
+      "required": false,
+      "description": "全局costmap发布频率",
+      "default_value": 1.0
+    },
+    {
+      "name": "local_frame",
+      "type": "string",
+      "required": false,
+      "description": "局部坐标系",
+      "default_value": "odom"
+    },
+    {
+      "name": "rolling_window",
+      "type": "boolean",
+      "required": false,
+      "description": "是否使用滚动窗口",
+      "default_value": true
+    },
+    {
+      "name": "width",
+      "type": "number",
+      "required": false,
+      "description": "局部costmap宽度",
+      "default_value": 3
+    },
+    {
+      "name": "height",
+      "type": "number",
+      "required": false,
+      "description": "局部costmap高度",
+      "default_value": 3
+    },
+    {
+      "name": "local_update_frequency",
+      "type": "number",
+      "required": false,
+      "description": "局部costmap更新频率",
+      "default_value": 5.0
+    },
+    {
+      "name": "local_publish_frequency",
+      "type": "number",
+      "required": false,
+      "description": "局部costmap发布频率",
+      "default_value": 2.0
+    },
+    {
+      "name": "obstacle_max_range",
+      "type": "number",
+      "required": false,
+      "description": "障碍物最大检测范围",
+      "default_value": 2.5
+    },
+    {
+      "name": "obstacle_min_range",
+      "type": "number",
+      "required": false,
+      "description": "障碍物最小检测范围",
+      "default_value": 0.0
+    },
+    {
+      "name": "raytrace_max_range",
+      "type": "number",
+      "required": false,
+      "description": "射线追踪最大范围",
+      "default_value": 3.0
+    },
+    {
+      "name": "raytrace_min_range",
+      "type": "number",
+      "required": false,
+      "description": "射线追踪最小范围",
+      "default_value": 0.0
+    },
+    {
+      "name": "max_obstacle_height",
+      "type": "number",
+      "required": false,
+      "description": "最大障碍物高度",
+      "default_value": 2.0
+    },
+    {
+      "name": "min_obstacle_height",
+      "type": "number",
+      "required": false,
+      "description": "最小障碍物高度",
+      "default_value": 0.0
+    },
+    {
+      "name": "inflation_radius",
+      "type": "number",
+      "required": false,
+      "description": "膨胀半径",
+      "default_value": 0.55
+    },
+    {
+      "name": "cost_scaling_factor",
+      "type": "number",
+      "required": false,
+      "description": "代价缩放因子",
+      "default_value": 1.0
+    }
+  ]
+} 

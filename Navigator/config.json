@@ -1,0 +1,102 @@
+{
+  "name": "Navigator",
+  "description": "导航器节点，基于nav2_bt_navigator包实现导航功能",
+  "type": "流",
+  "parameters": {
+    "inputs": [
+      {
+        "type": "string",
+        "name": "global_frame"
+      },
+      {
+        "type": "string", 
+        "name": "robot_base_frame"
+      }
+    ],
+    "outputs": [
+      {
+        "type": "string",
+        "name": "navigator_status"
+      }
+    ]
+  },
+  "config": [
+    {
+      "name": "transform_tolerance",
+      "type": "number",
+      "required": false,
+      "description": "坐标变换容差",
+      "default_value": 0.1
+    },
+    {
+      "name": "filter_duration",
+      "type": "number",
+      "required": false,
+      "description": "过滤器持续时间",
+      "default_value": 0.3
+    },
+    {
+      "name": "always_reload_bt_xml",
+      "type": "boolean",
+      "required": false,
+      "description": "是否总是重新加载行为树",
+      "default_value": false
+    },
+    {
+      "name": "goal_blackboard_id",
+      "type": "string",
+      "required": false,
+      "description": "目标黑板ID",
+      "default_value": "goal"
+    },
+    {
+      "name": "goals_blackboard_id",
+      "type": "string",
+      "required": false,
+      "description": "多目标黑板ID",
+      "default_value": "goals"
+    },
+    {
+      "name": "path_blackboard_id",
+      "type": "string",
+      "required": false,
+      "description": "路径黑板ID",
+      "default_value": "path"
+    },
+    {
+      "name": "waypoint_statuses_blackboard_id",
+      "type": "string",
+      "required": false,
+      "description": "路径点状态黑板ID",
+      "default_value": "waypoint_statuses"
+    },
+    {
+      "name": "navigate_to_pose_enable_groot",
+      "type": "boolean",
+      "required": false,
+      "description": "单点导航Groot监控",
+      "default_value": false
+    },
+    {
+      "name": "navigate_to_pose_groot_port",
+      "type": "number",
+      "required": false,
+      "description": "单点导航Groot端口",
+      "default_value": 1667
+    },
+    {
+      "name": "navigate_through_poses_enable_groot",
+      "type": "boolean",
+      "required": false,
+      "description": "多点导航Groot监控",
+      "default_value": false
+    },
+    {
+      "name": "navigate_through_poses_groot_port",
+      "type": "number",
+      "required": false,
+      "description": "多点导航Groot端口",
+      "default_value": 1669
+    }
+  ]
+} 
