@@ -26,7 +26,6 @@ class SensorManager:
         self._running = True
         self._latest_data = None
         
-        # 创建ROS2发布者
         qos_profile = QoSProfile(
             reliability=QoSReliabilityPolicy.RELIABLE,
             history=QoSHistoryPolicy.KEEP_LAST,
@@ -34,16 +33,13 @@ class SensorManager:
         )
         self.publisher = self.node.create_publisher(msg_type, topic_name, qos_profile)
         
-        # 创建定时器来控制发布频率
         self.timer = self.node.create_timer(1.0/publish_frequency, self.publish_data)
         
-        # 创建并启动监听线程
         self._thread = threading.Thread(target=self._run_sensor_listener)
         self._thread.daemon = True
         self._thread.start()
     
     def _run_sensor_listener(self):
-        """在独立线程中运行传感器监听"""
         weak_self = weakref.ref(self)
         try:
             self.sensor.listen(lambda data: self._on_sensor_data(weak_self, data))
@@ -52,15 +48,12 @@ class SensorManager:
             time.sleep(1)
     
     def _on_sensor_data(self, weak_self, data):
-        """处理传感器数据，由子类实现"""
         raise NotImplementedError
     
     def publish_data(self):
-        """发布数据，由子类实现"""
         raise NotImplementedError
     
     def destroy(self):
-        """清理资源"""
         self._running = False
         if self._thread.is_alive():
             self._thread.join(timeout=1.0)
@@ -80,25 +73,21 @@ class LidarManager(SensorManager):
             return
             
         try:
-            # 处理激光雷达数据
             points = np.frombuffer(data.raw_data, dtype=np.dtype('f4'))
             points = points.reshape((-1, 4))
             
-            # 创建ROS2消息
             header = Header()
             timestamp = get_timestamp()
             header.stamp.sec = timestamp // 1000
-            header.stamp.nanosec = (timestamp % 1000) * 1000000  # 转换为纳秒
+            header.stamp.nanosec = (timestamp % 1000) * 1000000
             header.frame_id = 'velodyne'
             
-            # 创建PointCloud2消息，添加环信息和强度值
             cloud_points = []
             for i, point in enumerate(points):
                 ring = i % 32
-                intensity = 1.0  # 设置默认强度值
+                intensity = 1.0
                 cloud_points.append([point[0], point[1], point[2], ring, intensity])
             
-            # 定义点云字段
             fields = [
                 PointField(name='x', offset=0, datatype=PointField.FLOAT32, count=1),
                 PointField(name='y', offset=4, datatype=PointField.FLOAT32, count=1),
@@ -107,7 +96,6 @@ class LidarManager(SensorManager):
                 PointField(name='intensity', offset=14, datatype=PointField.FLOAT32, count=1)
             ]
             
-            # 创建点云消息
             cloud = pc2.create_cloud(header, fields, cloud_points)
             
             with self._lock:
@@ -119,10 +107,9 @@ class LidarManager(SensorManager):
     def publish_data(self):
         with self._lock:
             if self._latest_data is not None:
-                # 更新时间戳
                 timestamp = get_timestamp()
                 self._latest_data.header.stamp.sec = timestamp // 1000
-                self._latest_data.header.stamp.nanosec = (timestamp % 1000) * 1000000  # 转换为纳秒
+                self._latest_data.header.stamp.nanosec = (timestamp % 1000) * 1000000
                 self.publisher.publish(self._latest_data)
 
 class CameraManager:
@@ -171,7 +158,7 @@ class GNSSManager(SensorManager):
             msg.header = Header()
             timestamp = get_timestamp()
             msg.header.stamp.sec = timestamp // 1000
-            msg.header.stamp.nanosec = (timestamp % 1000) * 1000000  # 转换为纳秒
+            msg.header.stamp.nanosec = (timestamp % 1000) * 1000000
             msg.header.frame_id = 'gps_link'
             
             msg.latitude = data.latitude
