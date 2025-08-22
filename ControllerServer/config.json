@@ -1,0 +1,167 @@
+{
+  "name": "ControllerServer",
+  "description": "ROS2导航控制服务节点",
+  "type": "流",
+  "parameters": {
+    "inputs": [
+      {
+        "type": "string",
+        "name": "odom_topic"
+      }
+    ],
+    "outputs": [
+      {
+        "type": "string",
+        "name": "控制配置",
+        "description": "缓存key: nav_controller_server"
+      }
+    ]
+  },
+  "config": [
+    {
+      "name": "controller_frequency",
+      "type": "number",
+      "default_value": 20.0,
+      "description": "控制器频率"
+    },
+    {
+      "name": "costmap_update_timeout",
+      "type": "number", 
+      "default_value": 0.3,
+      "description": "代价地图更新超时时间"
+    },
+    {
+      "name": "min_x_velocity_threshold",
+      "type": "number",
+      "default_value": 0.001,
+      "description": "最小X方向速度阈值"
+    },
+    {
+      "name": "min_y_velocity_threshold",
+      "type": "number",
+      "default_value": 0.0,
+      "description": "最小Y方向速度阈值"
+    },
+    {
+      "name": "min_theta_velocity_threshold",
+      "type": "number",
+      "default_value": 0.001,
+      "description": "最小角速度阈值"
+    },
+    {
+      "name": "failure_tolerance",
+      "type": "number",
+      "default_value": 0.3,
+      "description": "失败容忍度"
+    },
+    {
+      "name": "cmd_vel_topic",
+      "type": "string",
+      "default_value": "cmd_vel",
+      "description": "速度控制话题名称"
+    },
+    {
+      "name": "follow_path_topic",
+      "type": "string",
+      "default_value": "follow_path",
+      "description": "FollowPath话题名称"
+    },
+    {
+      "name": "required_movement_radius",
+      "type": "number",
+      "default_value": 0.5,
+      "description": "进度检查器所需移动半径"
+    },
+    {
+      "name": "movement_time_allowance",
+      "type": "number",
+      "default_value": 10.0,
+      "description": "移动时间允许值"
+    },
+    {
+      "name": "xy_goal_tolerance",
+      "type": "number",
+      "default_value": 0.25,
+      "description": "XY目标容差"
+    },
+    {
+      "name": "yaw_goal_tolerance",
+      "type": "number",
+      "default_value": 0.25,
+      "description": "偏航角目标容差"
+    },
+    {
+      "name": "xy_goal_tolerance_critic",
+      "type": "number",
+      "default_value": 0.25,
+      "description": "DWB旋转到目标批评器的XY目标容差"
+    },
+    {
+      "name": "yaw_goal_tolerance_critic",
+      "type": "number",
+      "default_value": 0.25,
+      "description": "DWB旋转到目标批评器的偏航角目标容差"
+    },
+    {
+      "name": "oscillation_reset_dist",
+      "type": "number",
+      "default_value": 0.05,
+      "description": "振荡重置距离"
+    },
+    {
+      "name": "forward_point_distance",
+      "type": "number",
+      "default_value": 0.325,
+      "description": "前向点距离"
+    },
+    {
+      "name": "threshold_to_consider",
+      "type": "number",
+      "default_value": 0.5,
+      "description": "路径对齐考虑阈值"
+    },
+    {
+      "name": "offset_from_furthest",
+      "type": "number",
+      "default_value": 20,
+      "description": "最远点偏移量"
+    },
+    {
+      "name": "trajectory_point_step",
+      "type": "number",
+      "default_value": 4,
+      "description": "轨迹点步长"
+    },
+    {
+      "name": "use_path_orientations",
+      "type": "boolean",
+      "default_value": false,
+      "description": "是否使用路径方向"
+    },
+    {
+      "name": "path_dist_scale",
+      "type": "number",
+      "default_value": 32.0,
+      "description": "路径距离批评器缩放因子"
+    },
+    {
+      "name": "goal_dist_scale",
+      "type": "number",
+      "default_value": 24.0,
+      "description": "目标距离批评器缩放因子"
+    },
+    { "name": "use_realtime_priority", "type": "boolean", "default_value": false, "description": "是否使用实时优先级" },
+    { "name": "speed_limit_topic", "type": "string", "default_value": "speed_limit", "description": "速度限制话题名称" },
+    { "name": "min_vel_x", "type": "number", "default_value": 0.0, "description": "最小线速度X" },
+    { "name": "max_vel_x", "type": "number", "default_value": 0.5, "description": "最大线速度X" },
+    { "name": "max_vel_theta", "type": "number", "default_value": 1.9, "description": "最大角速度" },
+    { "name": "acc_lim_x", "type": "number", "default_value": 2.5, "description": "线加速度上限" },
+    { "name": "acc_lim_theta", "type": "number", "default_value": 3.2, "description": "角加速度上限" },
+    { "name": "vx_samples", "type": "number", "default_value": 20, "description": "速度采样X数量" },
+    { "name": "vtheta_samples", "type": "number", "default_value": 20, "description": "角速度采样数量" },
+    { "name": "sim_time", "type": "number", "default_value": 2.0, "description": "仿真时间" },
+    { "name": "linear_granularity", "type": "number", "default_value": 0.05, "description": "线性分辨率" },
+    { "name": "angular_granularity", "type": "number", "default_value": 0.025, "description": "角度分辨率" },
+    { "name": "transform_tolerance", "type": "number", "default_value": 0.2, "description": "TF容忍时间" }
+  ]
+} 

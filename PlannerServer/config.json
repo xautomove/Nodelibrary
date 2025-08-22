@@ -8,7 +8,7 @@
         "type": "string",
         "name": "scan_topic"
       },
-            {
+      {
         "type": "string", 
         "name": "map_topic"
       }
@@ -16,7 +16,8 @@
     "outputs": [
       {
         "type": "string",
-        "name": "plan_topic"
+        "name": "规划配置",
+        "description": "缓存key: nav_planner_server"
       }
     ]
   },

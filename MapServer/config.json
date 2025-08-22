@@ -7,7 +7,8 @@
     "outputs": [
       {
         "type": "string",
-        "name": "map_name"
+        "name": "地图配置",
+        "description": "缓存key: nav_map_server"
       }
     ]
   },

@@ -1,0 +1,27 @@
+{
+  "name": "Nav2Launcher",
+  "description": "Read cache keys from upstream, merge to nav2 params and launch bringup",
+  "type": "流",
+  "parameters": {
+    "inputs": [
+      { "type": "string", "name": "地图配置", "description": "缓存key: nav_map_server" },
+      { "type": "string", "name": "导航配置", "description": "缓存key: nav_bt_navigator" },
+      { "type": "string", "name": "定位配置", "description": "缓存key: nav_amcl" },
+      { "type": "string", "name": "规划配置", "description": "缓存key: nav_planner_server" },
+      { "type": "string", "name": "控制配置", "description": "缓存key: nav_controller_server" }
+    ],
+    "outputs": [
+      { "type": "string", "name": "nav2_status" }
+    ]
+  },
+  "config": [
+    {
+      "name": "use_sim_time",
+      "type": "boolean",
+      "required": false,
+      "description": "是否使用仿真时间",
+      "default_value": false
+    }
+  ]
+}
+

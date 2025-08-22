@@ -16,7 +16,8 @@
     "outputs": [
       {
         "type": "string",
-        "name": "robot_pose"
+        "name": "定位配置",
+        "description": "缓存key: nav_amcl"
       }
     ]
   },
